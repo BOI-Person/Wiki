@@ -8,7 +8,7 @@
     container.style.padding = '3px';
     container.style.zIndex = '10000';
     container.style.boxSizing = 'border-box'; // ボックスサイズを設定
-    container.style.width = '120px'; // 幅を固定
+    container.style.width = '140px'; // 幅を固定
     container.style.height = 'auto'; // 高さを自動調整
 
     // Function to create a button
