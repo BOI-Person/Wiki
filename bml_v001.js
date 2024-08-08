@@ -5,12 +5,12 @@ container.style.position = 'fixed';
 container.style.bottom = '0px'; // フッターに配置するためにbottomを使用
 container.style.left = '0px'; // leftを使用して位置を調整
 container.style.width = '100%'; // 幅を100%に設定
-container.style.backgroundColor = 'rgba(255, 255, 255, 0.6)'; // 半透明にする
-container.style.borderTop = '0.2px solid black'; // 上部に境界線を追加
+// container.style.backgroundColor = 'rgba(255, 255, 255, 0.2)'; // 半透明にする
+// container.style.borderTop = '0.05px solid black'; // 上部に境界線を追加
 container.style.padding = '5px 0'; // 上下のパディングを小さく設定
 container.style.zIndex = '10000';
 container.style.boxSizing = 'border-box'; // ボックスサイズを設定
-container.style.display = 'flex'; // フレックスボックスを使用して横並びにする
+container.style.display = 'none'; // フレックスボックスを使用して横並びにする
 container.style.justifyContent = 'center'; // ボタンを中央に配置
 
 // Create a toggle button to show/hide the container
@@ -37,62 +37,42 @@ toggleButton.onclick = function() {
     }
 };
 
-// function群
-{
-    // Function to create a button
-    // 長押し対応
-    function createButton(label, onClickFunction) {
-        var button = document.createElement('button');
-        button.innerText = label;
-        button.style.margin = '0 5px'; // ボタン間のマージンを設定
-        button.style.padding = '5px 10px'; // ボタンのパディングを小さく設定
-        button.style.fontSize = '12px'; // フォントサイズを小さく設定
-        button.style.color = 'white'; // 文字色を白に固定
-        button.style.backgroundColor = 'purple'; // ボタンの背景色を設定
-        button.style.border = '1px solid black'; // ボタンの境界線を設定
-        button.style.cursor = 'pointer'; // カーソルをポインターに設定
-        button.onclick = onClickFunction;
-        container.appendChild(button);
-    }
+// Function to create a button
+function createButton(label, onClickFunction) {
+    var button = document.createElement('button');
+    button.innerText = label;
+    button.style.margin = '0 5px'; // ボタン間のマージンを設定
+    button.style.padding = '5px 10px'; // ボタンのパディングを小さく設定
+    button.style.fontSize = '12px'; // フォントサイズを小さく設定
+    button.style.color = 'white'; // 文字色を白に固定
+    button.style.backgroundColor = 'purple'; // ボタンの背景色を設定
+    button.style.border = '1px solid black'; // ボタンの境界線を設定
+    button.style.cursor = 'pointer'; // カーソルをポインターに設定
+    button.onclick = onClickFunction;
+    container.appendChild(button);
+}
 
-    // Function to save the current position to localStorage
-    function savePosition() {
-        localStorage.setItem('containerBottom', container.style.bottom);
-        localStorage.setItem('containerLeft', container.style.left);
-    }
-
-    // Function to load the saved position from localStorage
-    function loadPosition() {
-        var savedBottom = localStorage.getItem('containerBottom');
-        var savedLeft = localStorage.getItem('containerLeft');
-        if (savedBottom !== null && savedLeft !== null) {
-            container.style.bottom = savedBottom;
-            container.style.left = savedLeft;
-        }
-    }
-
-    function postApi(url, data) {
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data),
-            mode: 'no-cors'
+function postApi(url, data) {
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+        mode: 'no-cors'
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
         })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
-            })
-            .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
-            });
-    }
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
 }
 
 createButton('1:URLをコピー📄', function () {
@@ -115,7 +95,7 @@ createButton('2:ブクマ2SS📗', function () {
     postApi('https://script.google.com/macros/s/AKfycbzyDCJXbh6VIRPAZMCVEJkr7sqWVy_06J4ViBMhS7tYjUVxSV8Gz-0E8eMUkR8wpmRM/exec', { title: title, link: url });
 });
 
-// BookMart2SS
+// 管理画面DEV
 createButton('管理画面DEV', function () {
     window.open("https://develop.admin.koiniwa-boi.com/Master/MasterData", "②ウィンドウ名");
 });
