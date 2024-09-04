@@ -1,3 +1,5 @@
+// https://github.com/BOI-Person/Wiki/edit/main/bml_v001.js
+
 // スタイルを設定する関数
 function setStyles(element, styles) {
     Object.keys(styles).forEach(property => {
@@ -160,6 +162,14 @@ createButton('MD形式に変換', () => {
             });
 
         input.value = lines.join('\n');
+
+        // input.valueの先頭と末尾がもし"であれば削除する
+        if (input.value.startsWith('"')) {
+            input.value = input.value.slice(1);
+        }
+        if (input.value.endsWith('"')) {
+            input.value = input.value.slice(0, -1);
+        }
     }
 });
 
