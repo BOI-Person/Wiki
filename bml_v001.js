@@ -231,6 +231,15 @@ function initializeUI() {
             }
         },
         {
+            label: 'レビュー依頼',
+            onClick: () => {
+                const input = document.activeElement;
+                if (input.value !== undefined) {
+                    input.value = "@matsuoka.takayuki @miyazaki.tomonori  \nお手隙の際に、ご確認のほどよろしくお願いいたします  \n";
+                }
+            }
+        },
+        {
             label: 'LinkList',
             type: 'folder',
             folderButtonData: [
